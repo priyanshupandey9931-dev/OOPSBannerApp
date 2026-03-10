@@ -1,24 +1,70 @@
-package com.oopsbanner;
+import java.util.HashMap;
+import java.util.Map;
 
-public class OOPSBannerApp {
-    public static void main(String[] args) {
-        printOOPSBanner();
+public class OOPSBannerApp{
+
+    // Static Inner Class
+    static class CharacterPatternMap {
+
+        private char character;
+        private String[] pattern;
+
+        // Constructor
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        // Getter
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
     }
 
-    public static void printOOPSBanner() {
-        // UC3: Using String.join() for better memory management
-        // Each line is constructed by joining string parts without the '+' operator
+    public static void main(String[] args) {
 
-        String line1 = String.join("", " OOOO ", "  PPPP  ", "  PPPP  ", "  SSSS  ");
-        String line2 = String.join("", "O    O", " P   P ", " P   P ", " S      ");
-        String line3 = String.join("", "O    O", " PPPP  ", " PPPP  ", "  SSS   ");
-        String line4 = String.join("", "O    O", " P     ", " P     ", "     S  ");
-        String line5 = String.join("", " OOOO ", " P     ", " P     ", " SSSS   ");
+        Map<Character, CharacterPatternMap> map = new HashMap<>();
 
-        System.out.println(line1);
-        System.out.println(line2);
-        System.out.println(line3);
-        System.out.println(line4);
-        System.out.println(line5);
+        map.put('O', new CharacterPatternMap('O', new String[]{
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+        }));
+
+        map.put('P', new CharacterPatternMap('P', new String[]{
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        }));
+
+        map.put('S', new CharacterPatternMap('S', new String[]{
+                " ****",
+                "*    ",
+                " *** ",
+                "    *",
+                "**** "
+        }));
+
+        String word = "OOPS";
+
+        for (int row = 0; row < 5; row++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                CharacterPatternMap cp = map.get(ch);
+                line.append(cp.getPattern()[row]).append("  ");
+            }
+
+            System.out.println(line);
+        }
     }
 }
