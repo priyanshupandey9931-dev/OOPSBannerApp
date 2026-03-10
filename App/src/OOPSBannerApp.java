@@ -3,7 +3,7 @@ package com.oopsbanner;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OOPSBannerApp {
+public class OOPSBannerApp{
 
     // Map to store character patterns
     private static Map<Character, String[]> patternMap = new HashMap<>();
